@@ -1059,6 +1059,7 @@ function submitExam() {
   // ── SAVE TO FIREBASE ──
   if (_db && tokenKey) {
     try {
+      // Save token status
       _update(_ref(_db, 'tokens/' + tokenKey), {
         status: 'completed',
         studentName: student.name,
@@ -1068,10 +1069,33 @@ function submitExam() {
         percentage: pct,
         grade,
         timeUsed: tUsed,
-        violations: 0,
         completedAt: Date.now()
       });
-    } catch(e) {}
+
+      // Save full results to /results/ node
+      const theoryAnswers = bd.filter(q => q.type === 'theory').map((q, i) => ({
+        question: q.text,
+        marks: q.marks || '',
+        answer: q.ans || '(No answer)'
+      }));
+
+      const { set: _set } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js');
+      _set(_ref(_db, 'results/' + tokenKey), {
+        token: tokenKey,
+        studentName: student.name,
+        studentId: student.sid,
+        studentProg: student.prog,
+        score: correct + '/' + mcqTotal,
+        percentage: pct,
+        grade,
+        timeUsed: tUsed,
+        mcqCorrect: correct,
+        mcqTotal,
+        wrongQuestions: wrong,
+        theoryAnswers,
+        submittedAt: Date.now()
+      });
+    } catch(e) { console.warn('Firebase save error', e); }
   }
 
   showScreen('res-screen');
