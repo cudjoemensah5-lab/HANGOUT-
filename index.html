@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BGEC103 – Business Communication | Weeks 1–4 Exam</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap');
+
+:root {
+  --navy: #0f2044;
+  --blue: #1d4ed8;
+  --lightblue: #3b82f6;
+  --gold: #f59e0b;
+  --red: #dc2626;
+  --green: #16a34a;
+  --bg: #0a1628;
+  --white: #ffffff;
+  --cream: #f8faff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0a1628 0%, #0f2044 45%, #1a3a6e 100%);
+  min-height: 100vh;
+  padding: 20px;
+  color: #1e293b;
+}
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ── PASSWORD SCREEN ── */
+#pw-screen {
+  max-width: 440px;
+  margin: 90px auto;
+  background: #fff;
+  border-radius: 24px;
+  padding: 52px 40px;
+  text-align: center;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.55);
+}
+.pw-icon { font-size: 54px; margin-bottom: 14px; display: block; }
+#pw-screen h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--navy);
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+#pw-screen .pw-sub { color: #7c8ba0; font-size: 0.87rem; margin-bottom: 28px; line-height: 1.5; }
+#pw-input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  text-align: center;
+  letter-spacing: 4px;
+  outline: none;
+  margin-bottom: 14px;
+  transition: border 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+#pw-input:focus { border-color: var(--blue); }
+.pw-go {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--navy), #1a3a6e);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.15s;
+}
+.pw-go:hover { transform: scale(1.02); }
+#pw-err { color: var(--red); font-size: 0.84rem; margin-top: 10px; display: none; }
+
+/* ── REGISTER ── */
+#reg-screen {
+  max-width: 540px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.45);
+}
+.course-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--blue), #1e40af);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+#reg-screen h1 {
+  font-family: 'Playfair Display', serif;
+  color: var(--navy);
+  font-size: 1.65rem;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.reg-sub { color: #94a3b8; font-size: 0.86rem; margin-bottom: 22px; padding-bottom: 20px; border-bottom: 1px solid #f0f4ff; }
+.rules-box {
+  background: #eff6ff;
+  border-left: 4px solid var(--blue);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  font-size: 0.83rem;
+  color: #334155;
+  line-height: 1.75;
+}
+.rules-box ul { padding-left: 18px; }
+.field { margin-bottom: 18px; }
+.field label { display: block; font-size: 0.79rem; font-weight: 700; color: #475569; margin-bottom: 6px; letter-spacing: 0.3px; text-transform: uppercase; }
+.field input {
+  width: 100%;
+  padding: 13px 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s;
+  font-family: 'Inter', sans-serif;
+  color: #1e293b;
+}
+.field input:focus { border-color: var(--blue); }
+.start-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--blue), #1e40af);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: transform 0.15s, box-shadow 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.start-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(29,78,216,0.4); }
+
+/* ── EXAM SCREEN ── */
+#exam-screen { max-width: 800px; margin: 0 auto; }
+
+.exam-hdr {
+  background: linear-gradient(135deg, #0a1628, #0f2044);
+  color: white;
+  border-radius: 18px;
+  padding: 20px 28px;
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 10px;
+  z-index: 100;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+.hdr-info h3 { font-size: 0.76rem; opacity: 0.55; letter-spacing: 0.5px; font-weight: 400; }
+.hdr-info .hdr-name { font-size: 0.97rem; font-weight: 700; margin: 3px 0; }
+.hdr-info .hdr-prog { font-size: 0.74rem; opacity: 0.55; }
+.prog-wrap { margin-top: 8px; }
+.prog-lbl { font-size: 0.71rem; opacity: 0.6; margin-bottom: 4px; }
+.prog-bg { background: rgba(255,255,255,0.12); border-radius: 50px; height: 5px; width: 210px; overflow: hidden; }
+.prog-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #f59e0b); border-radius: 50px; transition: width 0.3s; }
+.timer-box {
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 10px 20px;
+  text-align: center;
+  min-width: 100px;
+}
+.t-lbl { font-size: 0.68rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+.t-time { font-size: 1.75rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.timer-box.warn { background: rgba(220,38,38,0.4); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.65} }
+
+.week-hdr {
+  background: linear-gradient(135deg, var(--gold), #d97706);
+  color: white;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 26px 0 6px;
+}
+.sec-hdr {
+  background: linear-gradient(135deg, var(--blue), #1e40af);
+  color: white;
+  border-radius: 10px;
+  padding: 11px 22px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin: 8px 0 14px;
+}
+
+.q-card {
+  background: white;
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin-bottom: 13px;
+  box-shadow: 0 3px 16px rgba(0,0,0,0.07);
+  border-left: 4px solid #e2e8f0;
+  transition: border-color 0.2s;
+}
+.q-card.done { border-left-color: var(--blue); }
+.q-num { font-size: 0.7rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; }
+.q-text { font-size: 0.96rem; font-weight: 600; color: var(--navy); line-height: 1.55; margin-bottom: 14px; }
+
+.opts { display: flex; flex-direction: column; gap: 9px; }
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 14px;
+  border: 2px solid #e8eef8;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 0.91rem;
+  color: #334155;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+.opt:hover { border-color: #93c5fd; background: #eff6ff; }
+.opt.sel { border-color: var(--blue); background: #dbeafe; font-weight: 500; }
+.opt input[type="radio"] { accent-color: var(--blue); width: 15px; height: 15px; flex-shrink: 0; }
+
+/* theory */
+.theory-ta {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.93rem;
+  font-family: 'Inter', sans-serif;
+  resize: vertical;
+  min-height: 95px;
+  outline: none;
+  transition: border 0.2s;
+  color: #1e293b;
+  line-height: 1.65;
+}
+.theory-ta:focus { border-color: var(--blue); }
+.marks-badge {
+  display: inline-block;
+  background: #eff6ff;
+  color: var(--blue);
+  border-radius: 50px;
+  padding: 3px 10px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.submit-zone {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+  margin-top: 22px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.submit-zone p { color: #64748b; font-size: 0.87rem; margin-bottom: 16px; }
+.submit-btn {
+  background: linear-gradient(135deg, var(--navy), #1a3a6e);
+  color: white;
+  border: none;
+  padding: 15px 54px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(10,22,40,0.4); }
+
+/* ── RESULTS ── */
+#res-screen { max-width: 800px; margin: 0 auto; }
+
+.res-hdr {
+  background: linear-gradient(135deg, #0a1628, #1a3a6e);
+  border-radius: 22px;
+  padding: 38px 32px;
+  color: white;
+  text-align: center;
+  margin-bottom: 22px;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.45);
+}
+.res-hdr h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 6px; }
+.res-student { opacity: 0.65; font-size: 0.87rem; }
+.score-row {
+  display: flex;
+  justify-content: center;
+  gap: 34px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+.score-circle {
+  width: 122px; height: 122px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.22);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.1);
+}
+.score-circle .big { font-size: 2rem; font-weight: 800; line-height: 1; }
+.score-circle .sm { font-size: 0.7rem; opacity: 0.6; margin-top: 4px; }
+.grade-badge { font-size: 4.4rem; font-weight: 900; font-family: 'Playfair Display', serif; text-shadow: 0 4px 18px rgba(0,0,0,0.35); }
+.gA { color: #4ade80; } .gB { color: #60a5fa; } .gC { color: #fbbf24; } .gD { color: #f87171; } .gF { color: #ef4444; }
+
+.motiv {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: 18px 26px;
+  margin-top: 22px;
+  font-style: italic;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.88);
+}
+.motiv-credit { display: block; margin-top: 8px; font-size: 0.76rem; opacity: 0.5; font-style: normal; font-weight: 700; letter-spacing: 0.5px; }
+
+.act-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+.wa-btn {
+  background: #25D366; color: white;
+  border: none; padding: 13px 26px;
+  border-radius: 12px; font-size: 0.9rem;
+  font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.15s;
+}
+.gm-btn {
+  background: #EA4335; color: white;
+  border: none; padding: 13px 26px;
+  border-radius: 12px; font-size: 0.9rem;
+  font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.15s;
+}
+.wa-btn:hover, .gm-btn:hover { transform: scale(1.04); }
+
+.breakdown-card {
+  background: white;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin-bottom: 22px;
+}
+.breakdown-card h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 18px; }
+.ans-item {
+  padding: 13px 16px;
+  border-radius: 10px;
+  margin-bottom: 9px;
+  font-size: 0.87rem;
+  line-height: 1.55;
+}
+.ans-item.ok { background: #f0fdf4; border-left: 4px solid var(--green); }
+.ans-item.bad { background: #fef2f2; border-left: 4px solid var(--red); }
+.ans-item.th { background: #eff6ff; border-left: 4px solid var(--blue); }
+.aq { font-weight: 700; font-size: 0.74rem; color: #94a3b8; }
+.at { font-weight: 600; color: var(--navy); margin: 3px 0; }
+.aa { font-size: 0.85rem; }
+.ca { color: var(--green); font-weight: 600; }
+.wa { color: var(--red); font-weight: 600; }
+
+footer {
+  text-align: center;
+  padding: 22px;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.76rem;
+  letter-spacing: 0.5px;
+}
+</style>
+</head>
+<body>
+
+<!-- ACCESS GATE: PASSWORD + TOKEN -->
+<div id="pw-screen" class="screen active">
+  <div style="text-align:center;margin-bottom:22px">
+    <svg width="58" height="58" viewBox="0 0 58 58" fill="none" style="display:block;margin:0 auto 12px">
+      <circle cx="29" cy="29" r="27" fill="#0f2044" opacity="0.08" stroke="#0f2044" stroke-width="1.5"/>
+      <circle cx="29" cy="29" r="20" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="29" y="34" font-family="serif" font-weight="bold" font-size="13" fill="#1d4ed8" text-anchor="middle">HP</text>
+      <circle cx="42" cy="42" r="11" fill="#f59e0b"/>
+      <polyline points="38,42 41,45 47,39" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <span class="pw-icon" style="font-size:36px;margin-bottom:6px;display:block">🔐</span>
+    <h2 style="margin-bottom:6px">Exam Access</h2>
+    <p class="pw-sub">Enter your exam password and personal token to proceed.</p>
+  </div>
+
+  <!-- PASSWORD FIELD -->
+  <div style="margin-bottom:14px;text-align:left">
+    <label style="display:block;font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">🔑 Exam Password</label>
+    <input type="password" id="pw-input" placeholder="Enter exam password"
+      autocomplete="off"
+      style="width:100%;padding:13px 15px;border:2px solid #e2e8f0;border-radius:12px;font-size:0.95rem;outline:none;font-family:'Inter',sans-serif;color:#1e293b;transition:border 0.2s"
+      onfocus="this.style.borderColor='#1d4ed8'" onblur="this.style.borderColor='#e2e8f0'"
+      onkeydown="if(event.key==='Enter')document.getElementById('token-input').focus()"/>
+  </div>
+
+  <!-- TOKEN FIELD -->
+  <div style="margin-bottom:20px;text-align:left">
+    <label style="display:block;font-size:0.72rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">🎟 Exam Token</label>
+    <input type="text" id="token-input" placeholder="e.g. HPAB12CD"
+      autocomplete="off"
+      style="width:100%;padding:13px 15px;border:2px solid #e2e8f0;border-radius:12px;font-size:0.95rem;outline:none;font-family:'Inter',sans-serif;color:#1e293b;letter-spacing:3px;text-transform:uppercase;transition:border 0.2s"
+      onfocus="this.style.borderColor='#1d4ed8'" onblur="this.style.borderColor='#e2e8f0'"
+      oninput="this.value=this.value.toUpperCase()"
+      onkeydown="if(event.key==='Enter')checkPW()"/>
+  </div>
+
+  <button class="pw-go" onclick="checkPW()">🔓 Verify &amp; Proceed</button>
+
+  <div id="pw-err" style="display:none;color:#dc2626;font-size:0.83rem;margin-top:12px;background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:10px 14px"></div>
+  <div id="pw-verifying" style="display:none;margin-top:12px;font-size:0.8rem;color:#64748b;text-align:center">🔄 Verifying token with server…</div>
+  <div id="pw-attempts" style="margin-top:8px;font-size:0.72rem;color:#94a3b8;text-align:center"></div>
+</div>
+
+<!-- REGISTER -->
+<div id="reg-screen" class="screen">
+  <div class="course-badge">📚 BGEC 103 · UPSA · 2025/2026</div>
+  <h1>Business Communication</h1>
+  <p class="reg-sub">Weeks 1–4 Mid-Semester Assessment · Degree Programme · First Semester</p>
+
+  <div class="rules-box">
+    <ul>
+      <li>⏱️ You have <strong>40 minutes</strong> to complete this exam</li>
+      <li>📋 <strong>35 questions</strong> — 25 MCQ objectives + 10 theory questions</li>
+      <li>📖 Covers <strong>Weeks 1–4</strong>: Foundations, Nature, Organisational Communication & Professional Emails/Memos</li>
+      <li>🚫 <strong>One attempt only</strong> — submission is final</li>
+      <li>📩 Results will be shared automatically after submission</li>
+    </ul>
+  </div>
+
+  <div class="field">
+    <label>Full Name</label>
+    <input type="text" id="reg-name" placeholder="e.g. Kwame Asante Mensah"/>
+  </div>
+  <div class="field">
+    <label>Student ID</label>
+    <input type="text" id="reg-id" placeholder="e.g. UPSA/BS/2025/0001"/>
+  </div>
+  <div class="field">
+    <label>Programme</label>
+    <input type="text" id="reg-prog" placeholder="e.g. BSc Business Administration"/>
+  </div>
+
+  <button class="start-btn" onclick="startExam()">🚀 Start Exam</button>
+</div>
+
+<!-- EXAM -->
+<div id="exam-screen" class="screen">
+  <div class="exam-hdr">
+    <div class="hdr-info">
+      <h3>BGEC 103 · Business Communication · Weeks 1–4</h3>
+      <div class="hdr-name" id="hdr-name">Student</div>
+      <div class="hdr-prog" id="hdr-prog"></div>
+      <div class="prog-wrap">
+        <div class="prog-lbl" id="prog-lbl">0 / 35 answered</div>
+        <div class="prog-bg"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="timer-box" id="timer-box">
+      <div class="t-lbl">Time Left</div>
+      <div class="t-time" id="timer">40:00</div>
+    </div>
+  </div>
+
+  <div id="q-container"></div>
+
+  <div class="submit-zone">
+    <p>Review all your answers before submitting. This action cannot be undone.</p>
+    <button class="submit-btn" onclick="confirmSubmit()">✅ Submit Exam</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="res-screen" class="screen">
+  <div class="res-hdr">
+    <h2>📊 Exam Results</h2>
+    <div class="res-student" id="res-student"></div>
+    <div class="score-row">
+      <div class="score-circle"><div class="big" id="res-pct">0%</div><div class="sm">Score</div></div>
+      <div class="grade-badge" id="res-grade">-</div>
+      <div class="score-circle"><div class="big" id="res-time">-</div><div class="sm">Time Used</div></div>
+    </div>
+    <div class="motiv" id="motiv"></div>
+  </div>
+
+  <div class="act-btns">
+    <button class="wa-btn" onclick="sendWA()">📲 Send via WhatsApp</button>
+    <button class="gm-btn" onclick="sendGmail()">📧 Send via Gmail</button>
+  </div>
+
+  <div class="breakdown-card">
+    <h3>📋 Answer Breakdown</h3>
+    <div id="breakdown"></div>
+  </div>
+</div>
+
+<footer>HangOut Publications · UPSA · BGEC103 Weeks 1–4 · Business Communication</footer>
+
+<script>
+const PASSWORD = "BGEC103";
+const BYPASS_TOKENS = ["HPTEST2026", "HANGOUT2026"];
+
+// ── FIREBASE ──
+let _db, _ref, _get, _update;
+let tokenKey = null;
+let tokenAttempts = 0;
+const MAX_ATTEMPTS = 5;
+
+(async () => {
+  try {
+    const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
+    const { getDatabase, ref, get, update } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js');
+    const app = initializeApp({
+      apiKey: "AIzaSyAqVaTAi6FF8F7fgspcF8jxInwPdpe40rs",
+      authDomain: "hangoutpublications-exam.firebaseapp.com",
+      databaseURL: "https://hangoutpublications-exam-default-rtdb.firebaseio.com",
+      projectId: "hangoutpublications-exam"
+    });
+    _db = getDatabase(app);
+    _ref = ref; _get = get; _update = update;
+  } catch(e) { console.warn('Firebase load error', e); }
+})();
+
+function getDeviceId() {
+  let id = sessionStorage.getItem('hp_dev');
+  if (!id) { id = 'D' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); sessionStorage.setItem('hp_dev', id); }
+  return id;
+}
+
+function showErr(msg) {
+  const el = document.getElementById('pw-err');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+async function checkPW() {
+  if (tokenAttempts >= MAX_ATTEMPTS) return;
+
+  const pw  = document.getElementById('pw-input').value.trim();
+  const tok = document.getElementById('token-input').value.trim().toUpperCase();
+  const verEl = document.getElementById('pw-verifying');
+  const attEl = document.getElementById('pw-attempts');
+  document.getElementById('pw-err').style.display = 'none';
+
+  if (!pw)  { showErr('❌ Please enter the exam password.'); return; }
+  if (!tok) { showErr('❌ Please enter your exam token.'); return; }
+
+  // Step 1: password check
+  if (pw !== PASSWORD) {
+    showErr('❌ Incorrect exam password. Please try again.');
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+    return;
+  }
+
+  // Step 2: bypass tokens (no Firebase needed)
+  if (BYPASS_TOKENS.includes(tok)) {
+    tokenKey = tok;
+    showScreen('reg-screen');
+    return;
+  }
+
+  // Step 3: Firebase token check
+  if (!_db) {
+    tokenKey = tok;
+    showScreen('reg-screen');
+    return;
+  }
+
+  verEl.style.display = 'block';
+  document.querySelector('.pw-go').disabled = true;
+
+  try {
+    const snap = await _get(_ref(_db, 'tokens/' + tok));
+    verEl.style.display = 'none';
+    document.querySelector('.pw-go').disabled = false;
+
+    if (!snap.exists()) {
+      tokenAttempts++;
+      const left = MAX_ATTEMPTS - tokenAttempts;
+      if (left <= 0) {
+        showErr('🔒 Too many failed attempts. Contact your lecturer.');
+        document.querySelector('.pw-go').disabled = true;
+        document.getElementById('token-input').disabled = true;
+        document.getElementById('pw-input').disabled = true;
+      } else {
+        showErr(`❌ Invalid token. ${left} attempt(s) remaining.`);
+        attEl.textContent = '⚠️ ' + left + ' attempt(s) left';
+        document.getElementById('token-input').value = '';
+        document.getElementById('token-input').focus();
+      }
+      return;
+    }
+
+    const data = snap.val();
+    if (data.status === 'blocked')   { showErr('🚫 This token has been blocked. Contact your lecturer.'); return; }
+    if (data.status === 'completed') { showErr('✅ This exam was already completed with this token.'); return; }
+    if (data.status === 'active' && data.deviceId && data.deviceId !== getDeviceId()) {
+      showErr('⚠️ This token is already active on another device.'); return;
+    }
+
+    // ✅ Both password and token valid
+    tokenKey = tok;
+    await _update(_ref(_db, 'tokens/' + tok), { status: 'active', deviceId: getDeviceId(), startedAt: Date.now() });
+    if (data.name)    document.getElementById('reg-name').value = data.name;
+    if (data.indexNo) document.getElementById('reg-id').value   = data.indexNo;
+    showScreen('reg-screen');
+
+  } catch(e) {
+    verEl.style.display = 'none';
+    document.querySelector('.pw-go').disabled = false;
+    showErr('⚠️ Connection error. Check your internet and try again.');
+  }
+}
+
+// ── QUESTIONS ──
+const questions = [
+
+  // ════════════════════ WEEK 1 ════════════════════
+  {
+    type:'mcq',
+    week:'Week 1: Foundations of Business Communication',
+    section:'Section A: Multiple Choice Questions (25 Questions)',
+    text:'The Latin root of the word "communication," <em>communicare</em>, means:',
+    options:['A. To transmit signals electronically','B. To share or make common','C. To speak formally','D. To write official documents'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'Which of the following BEST defines business communication?',
+    options:['A. The study of grammar and writing skills','B. The exchange of information, ideas, and messages within or outside an organisation to achieve business objectives','C. One-way transmission of orders from management to employees','D. Social media management for companies'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'According to Little (1977), business communication is:',
+    options:['A. The formal exchange of written memos between departments','B. A digital platform for sharing company news','C. The flow of information, perception, and understanding among persons involved in the business process','D. The use of technology to improve workplace efficiency'],
+    answer:2
+  },
+  {
+    type:'mcq',
+    text:'Which communication type involves transmitting messages to a large audience through mediated channels such as TV, radio, or the Internet?',
+    options:['A. Interpersonal communication','B. Small group communication','C. Mass communication','D. Organisational communication'],
+    answer:2
+  },
+  {
+    type:'mcq',
+    text:'The first step in the communication process is:',
+    options:['A. Feedback from the receiver','B. The sender forming an idea and encoding a message','C. Choosing the channel','D. Decoding the message'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'Which of the following is an example of a <em>paralanguage</em> (vocal code)?',
+    options:['A. A written email','B. A company logo','C. Tone of voice, pitch, and volume','D. A PowerPoint slide'],
+    answer:2
+  },
+  {
+    type:'mcq',
+    text:'Decoding in the communication process refers to:',
+    options:['A. The sender converting an idea into a message','B. The channel used to transmit the message','C. The process through which the receiver interprets the exact meaning of a message','D. Writing the message in code for security'],
+    answer:2
+  },
+  {
+    type:'mcq',
+    text:'Which context type refers to the mental and emotional states of communicators that affect how messages are conveyed and received?',
+    options:['A. Historical context','B. Psychological context','C. Social context','D. Cultural context'],
+    answer:1
+  },
+
+  // ════════════════════ WEEK 2 ════════════════════
+  {
+    type:'mcq',
+    week:'Week 2: The Nature of Business Communication',
+    text:'Effective communication is defined as:',
+    options:['A. Sending a message as quickly as possible','B. The simultaneous, identical understanding of the content and intent of a message by both sender and receiver','C. Using formal language in all business interactions','D. Communicating through digital channels only'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'Which of the following is NOT one of the 7 Cs of Communication?',
+    options:['A. Conciseness','B. Creativity','C. Correctness','D. Concreteness'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'Filtering as a barrier to communication refers to:',
+    options:['A. Using too many technical jargon terms','B. Emotional disconnect between sender and receiver','C. The intentional distortion of information to make it appear favourable to the recipient','D. Selecting the wrong communication channel'],
+    answer:2
+  },
+  {
+    type:'mcq',
+    text:'Semantics as a barrier to effective communication is mainly about:',
+    options:['A. Using the wrong communication channel','B. Words meaning different things to different people, and the use of jargon or technical terms','C. Emotional interference in the communication process','D. Physical noise in the communication environment'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'The 7th C of Communication — Courtesy — involves:',
+    options:['A. Making messages short and to the point','B. Ensuring all necessary information is included','C. Being polite, respectful, and considerate in tone and word choice','D. Using specific facts and data to support messages'],
+    answer:2
+  },
+  {
+    type:'mcq',
+    text:'Adaptation in business communication refers to:',
+    options:['A. Updating technology systems to improve communication','B. Tailoring a message to a specific receiver or audience','C. Changing language from informal to formal','D. Adjusting the font size of written documents'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'Which characteristic of business communication ensures that the recipient knows exactly what action to take next?',
+    options:['A. Professionalism','B. Adaptability','C. Purposefulness','D. Action orientation'],
+    answer:3
+  },
+  {
+    type:'mcq',
+    text:'Selective perception as a communication barrier occurs when:',
+    options:['A. The sender intentionally hides information','B. The receiver filters messages based on their own needs, motivation, experience, and background','C. Technical jargon confuses the audience','D. Feedback is delayed in the communication process'],
+    answer:1
+  },
+
+  // ════════════════════ WEEK 3 ════════════════════
+  {
+    type:'mcq',
+    week:'Week 3: Organisational Communication',
+    text:'According to Davis (1953), communication can be described as the ________ of an organisation.',
+    options:['A. Brain','B. Soul','C. Nervous system','D. Backbone'],
+    answer:2
+  },
+  {
+    type:'mcq',
+    text:'Diagonal communication in an organisation involves:',
+    options:['A. Communication only between employees at the same level','B. Messages flowing strictly from superiors to subordinates','C. Exchange of information across different levels and departments, cutting across hierarchical and functional lines','D. Communication between an organisation and external clients'],
+    answer:2
+  },
+  {
+    type:'mcq',
+    text:'The grapevine is best described as:',
+    options:['A. A formal communication network used by top management','B. The major informal communication channel that transmits rumours and unofficial messages','C. A type of email chain used for internal announcements','D. A digital bulletin board system'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'Downward communication in an organisation involves:',
+    options:['A. Grievances and performance reports from subordinates to managers','B. Information flowing from top administration to lower levels or from superiors to subordinates','C. Communication between employees of equal rank','D. Reports sent to external stakeholders'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'Which of the following is a form of EXTERNAL organisational communication?',
+    options:['A. An internal memo to staff','B. A team briefing session','C. A press release to the public','D. An intranet post'],
+    answer:2
+  },
+  {
+    type:'mcq',
+    text:'According to research cited in the lecture, information carried by the grapevine is:',
+    options:['A. Completely unreliable and should be ignored','B. 75 to 95% accurate','C. Always negative and harmful','D. Only about personal gossip'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'Intranets differ from the Internet in that they are:',
+    options:['A. Faster than the regular Internet','B. Only accessible to government agencies','C. Internal networks using web-type software, protected from outside visitors','D. A type of extranet for suppliers'],
+    answer:2
+  },
+
+  // ════════════════════ WEEK 4 ════════════════════
+  {
+    type:'mcq',
+    week:'Week 4: Writing Professional Emails and Memos',
+    text:'Which of the following is a key structural component of a professional email?',
+    options:['A. A catchy headline and infographic','B. Subject line, salutation, body, closing, and signature','C. Only a body paragraph and a logo','D. A table of contents and appendix'],
+    answer:1
+  },
+  {
+    type:'mcq',
+    text:'In the poorly-written memo example from the lecture, why was the memo considered ineffective?',
+    options:['A. It was too long and detailed','B. It was informal, vague, had no policy specifics, no effective date, and no instructions','C. It was sent to the wrong department','D. It used too many technical terms'],
+    answer:1
+  },
+
+  // ════════════════════ THEORY ════════════════════
+  {
+    type:'theory',
+    week:'',
+    section:'Section B: Theory / Short Answer Questions (10 Questions)',
+    text:'Define business communication and explain THREE reasons why it is considered the "backbone" of any organisation. (6 marks)',
+    marks:6
+  },
+  {
+    type:'theory',
+    text:'Identify and briefly explain FIVE elements of the communication process. For each element, provide one relevant example from a business context. (10 marks)',
+    marks:10
+  },
+  {
+    type:'theory',
+    text:'Explain the difference between effective and ineffective communication. Using the sender-message-receiver model (A → B → C), illustrate both scenarios with examples. (6 marks)',
+    marks:6
+  },
+  {
+    type:'theory',
+    text:'Describe FOUR characteristics of business communication and explain how each contributes to organisational success. (8 marks)',
+    marks:8
+  },
+  {
+    type:'theory',
+    text:'Identify and explain FOUR barriers to effective business communication. For each barrier, suggest ONE practical way to overcome it. (8 marks)',
+    marks:8
+  },
+  {
+    type:'theory',
+    text:'Explain the 7 Cs of Communication. For any FOUR of them, write a before-and-after example showing how applying the principle improves the message. (8 marks)',
+    marks:8
+  },
+  {
+    type:'theory',
+    text:'Distinguish between downward, upward, horizontal, and diagonal communication in an organisation. Give ONE example of each type. (8 marks)',
+    marks:8
+  },
+  {
+    type:'theory',
+    text:'Explain the concept of the "grapevine" in organisational communication. Discuss TWO advantages and TWO disadvantages of grapevine communication. (6 marks)',
+    marks:6
+  },
+  {
+    type:'theory',
+    text:'Write a well-structured professional email from a student to a lecturer requesting a reschedule of a submission deadline. Your email should demonstrate proper tone, structure, and language as taught in Week 4. (6 marks)',
+    marks:6
+  },
+  {
+    type:'theory',
+    text:'Explain why selecting the right communication channel is important. Discuss THREE factors that should influence channel selection in business communication. (6 marks)',
+    marks:6
+  }
+];
+
+// ── STATE ──
+let student = {};
+let secLeft = 40 * 60;
+let timerInt, startTime;
+let submitted = false;
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ── PASSWORD ──
+// ── START ──
+function startExam() {
+  const n = document.getElementById('reg-name').value.trim();
+  const s = document.getElementById('reg-id').value.trim();
+  const p = document.getElementById('reg-prog').value.trim();
+  if (!n || !s || !p) { alert('Please fill in all fields before starting.'); return; }
+  student = { name: n, sid: s, prog: p };
+  startTime = new Date();
+  document.getElementById('hdr-name').textContent = n + ' · ' + s;
+  document.getElementById('hdr-prog').textContent = p;
+  buildQuestions();
+  showScreen('exam-screen');
+  startTimer();
+}
+
+// ── BUILD ──
+function buildQuestions() {
+  const c = document.getElementById('q-container');
+  c.innerHTML = '';
+  let shownWeek = {}, shownSec = {}, qn = 0;
+
+  questions.forEach((q, idx) => {
+    if (q.week && !shownWeek[q.week]) {
+      const w = document.createElement('div');
+      w.className = 'week-hdr';
+      w.textContent = '📘 ' + q.week;
+      c.appendChild(w);
+      shownWeek[q.week] = true;
+    }
+    if (q.section && !shownSec[q.section]) {
+      const sh = document.createElement('div');
+      sh.className = 'sec-hdr';
+      sh.textContent = q.section;
+      c.appendChild(sh);
+      shownSec[q.section] = true;
+    }
+    qn++;
+
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'card-' + idx;
+    card.innerHTML = `<div class="q-num">Question ${qn}</div><div class="q-text">${q.text}</div>`;
+
+    if (q.type === 'mcq') {
+      const opts = document.createElement('div');
+      opts.className = 'opts';
+      q.options.forEach((o, oi) => {
+        const lbl = document.createElement('label');
+        lbl.className = 'opt';
+        lbl.innerHTML = `<input type="radio" name="q${idx}" value="${oi}" onchange="pick(${idx},this)"/> ${o}`;
+        opts.appendChild(lbl);
+      });
+      card.appendChild(opts);
+    } else {
+      const mb = document.createElement('div');
+      mb.className = 'marks-badge';
+      mb.textContent = q.marks + ' marks';
+      const ta = document.createElement('textarea');
+      ta.className = 'theory-ta';
+      ta.id = 'ta-' + idx;
+      ta.placeholder = 'Write your answer here...';
+      ta.addEventListener('input', updateProg);
+      card.appendChild(mb);
+      card.appendChild(ta);
+    }
+    c.appendChild(card);
+  });
+}
+
+function pick(idx, el) {
+  const card = document.getElementById('card-' + idx);
+  card.querySelectorAll('.opt').forEach(l => l.classList.remove('sel'));
+  el.parentElement.classList.add('sel');
+  card.classList.add('done');
+  updateProg();
+}
+
+function updateProg() {
+  let a = 0;
+  questions.forEach((q, idx) => {
+    if (q.type === 'mcq') {
+      if (document.querySelector(`input[name="q${idx}"]:checked`)) a++;
+    } else {
+      const ta = document.getElementById('ta-' + idx);
+      if (ta && ta.value.trim().length > 8) a++;
+    }
+  });
+  const pct = Math.round(a / questions.length * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-lbl').textContent = a + ' / ' + questions.length + ' answered';
+}
+
+// ── TIMER ──
+function startTimer() {
+  timerInt = setInterval(() => {
+    secLeft--;
+    const m = String(Math.floor(secLeft / 60)).padStart(2, '0');
+    const s = String(secLeft % 60).padStart(2, '0');
+    document.getElementById('timer').textContent = m + ':' + s;
+    if (secLeft <= 300) document.getElementById('timer-box').classList.add('warn');
+    if (secLeft <= 0) { clearInterval(timerInt); submitExam(); }
+  }, 1000);
+}
+
+function confirmSubmit() {
+  if (confirm('Are you sure you want to submit? This cannot be undone.')) {
+    clearInterval(timerInt);
+    submitExam();
+  }
+}
+
+// ── SUBMIT ──
+function submitExam() {
+  if (submitted) return;
+  submitted = true;
+
+  const end = new Date();
+  const used = Math.round((end - startTime) / 1000);
+  const tUsed = Math.floor(used / 60) + 'm ' + (used % 60) + 's';
+
+  let correct = 0, wrong = [], mcqTotal = 0;
+  const bd = [];
+
+  questions.forEach((q, idx) => {
+    if (q.type === 'mcq') {
+      mcqTotal++;
+      const sel = document.querySelector(`input[name="q${idx}"]:checked`);
+      const chosen = sel ? parseInt(sel.value) : -1;
+      const ok = chosen === q.answer;
+      if (ok) correct++; else wrong.push(idx + 1);
+      bd.push({ ...q, idx, chosen, ok });
+    } else {
+      const ta = document.getElementById('ta-' + idx);
+      bd.push({ ...q, idx, ans: ta ? ta.value.trim() : '' });
+    }
+  });
+
+  const pct = Math.round(correct / mcqTotal * 100);
+  let grade, gc, motiv;
+
+  if (pct >= 80) {
+    grade = 'A'; gc = 'gA';
+    motiv = '"Outstanding performance! Your mastery of Business Communication reflects true academic dedication. Keep setting the standard — the boardroom awaits."';
+  } else if (pct >= 70) {
+    grade = 'B'; gc = 'gB';
+    motiv = '"Very good work! You have demonstrated a solid grasp of business communication principles. A little more focus and excellence is within your reach."';
+  } else if (pct >= 60) {
+    grade = 'C'; gc = 'gC';
+    motiv = '"A fair result — but remember, every great communicator started somewhere. Review the 7 Cs and communication barriers, and come back stronger."';
+  } else {
+    grade = 'D'; gc = 'gD';
+    motiv = '"Don\'t be discouraged. Business communication is a skill that grows with practice and study. Revisit the lecture notes from Weeks 1–4 and believe in your potential."';
+  }
+
+  student = { ...student, grade, pct: pct + '%', score: correct + '/' + mcqTotal, tUsed, wrong, correct, mcqTotal, bd };
+
+  document.getElementById('res-student').textContent = student.name + ' · ' + student.sid + ' · ' + student.prog;
+  document.getElementById('res-pct').textContent = pct + '%';
+  document.getElementById('res-time').textContent = tUsed;
+  const gb = document.getElementById('res-grade');
+  gb.textContent = grade;
+  gb.className = 'grade-badge ' + gc;
+  document.getElementById('motiv').innerHTML = `<em>${motiv}</em><span class="motiv-credit">— HangOut Publications</span>`;
+
+  const bdEl = document.getElementById('breakdown');
+  bdEl.innerHTML = '';
+  let qn = 0;
+  bd.forEach(item => {
+    qn++;
+    const d = document.createElement('div');
+    if (item.type === 'theory') {
+      d.className = 'ans-item th';
+      d.innerHTML = `<div class="aq">Q${qn} · Theory · ${item.marks} marks</div>
+        <div class="at">${item.text}</div>
+        <div class="aa">Your answer: <em>${item.ans || '(No answer provided)'}</em></div>`;
+    } else {
+      d.className = 'ans-item ' + (item.ok ? 'ok' : 'bad');
+      const ct = item.chosen >= 0 ? item.options[item.chosen] : '(Not answered)';
+      d.innerHTML = `<div class="aq">Q${qn} · ${item.ok ? '✅ Correct' : '❌ Wrong'}</div>
+        <div class="at">${item.text}</div>
+        <div class="aa">Your answer: <span class="${item.ok ? 'ca' : 'wa'}">${ct}</span></div>
+        ${!item.ok ? `<div class="aa">Correct answer: <span class="ca">${item.options[item.answer]}</span></div>` : ''}`;
+    }
+    bdEl.appendChild(d);
+  });
+
+  // ── SAVE TO FIREBASE ──
+  if (_db && tokenKey) {
+    try {
+      _update(_ref(_db, 'tokens/' + tokenKey), {
+        status: 'completed',
+        studentName: student.name,
+        studentId: student.sid,
+        studentProg: student.prog,
+        score: correct + '/' + mcqTotal,
+        percentage: pct,
+        grade,
+        timeUsed: tUsed,
+        violations: 0,
+        completedAt: Date.now()
+      });
+    } catch(e) {}
+  }
+
+  showScreen('res-screen');
+}
+
+// ── WHATSAPP ──
+function sendWA() {
+  const d = student;
+  const wl = d.wrong.length ? 'Q' + d.wrong.join(', Q') : 'None';
+  const msg = encodeURIComponent(
+    `📊 *BGEC103 EXAM RESULT*\n` +
+    `Course: Business Communication (Weeks 1–4)\n\n` +
+    `👤 *Name:* ${d.name}\n🆔 *Student ID:* ${d.sid}\n🎓 *Programme:* ${d.prog}\n\n` +
+    `✅ *Score:* ${d.correct}/${d.mcqTotal} (${d.pct})\n` +
+    `🏆 *Grade:* ${d.grade}\n⏱️ *Time Used:* ${d.tUsed}\n` +
+    `❌ *Wrong Questions:* ${wl}\n\n_HangOut Publications · UPSA_`
+  );
+  window.open('https://wa.me/233531548864?text=' + msg, '_blank');
+}
+
+// ── GMAIL ──
+function sendGmail() {
+  const d = student;
+  const wl = d.wrong.length ? 'Q' + d.wrong.join(', Q') : 'None';
+  const subj = encodeURIComponent('BGEC103 Exam Result — ' + d.name + ' (' + d.sid + ')');
+  const body = encodeURIComponent(
+    'BGEC103: Business Communication — Weeks 1–4 Exam\n\n' +
+    'Name: ' + d.name + '\nStudent ID: ' + d.sid + '\nProgramme: ' + d.prog + '\n\n' +
+    'Score: ' + d.correct + '/' + d.mcqTotal + ' (' + d.pct + ')\n' +
+    'Grade: ' + d.grade + '\nTime Used: ' + d.tUsed + '\nWrong Qs: ' + wl + '\n\n' +
+    'HangOut Publications · UPSA'
+  );
+  window.open(`https://mail.google.com/mail/?view=cm&to=cudjoemensah5%40gmail.com&su=${subj}&body=${body}`, '_blank');
+}
+</script>
+</body>
+</html>
